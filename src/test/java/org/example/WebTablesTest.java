@@ -1,16 +1,28 @@
 package org.example;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import static org.junit.Assert.assertEquals;
 
 public class WebTablesTest {
 
-    public static void main(String[] args) {
-        WebDriver driver = new ChromeDriver();
+    private WebDriver driver;
+
+    @Before
+    public void setUp() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void testAddRecord() {
         driver.get("https://demoqa.com/webtables");
 
         // "ADD" düğmesine tıkla
@@ -19,22 +31,22 @@ public class WebTablesTest {
 
         // Yeni kayıt formunu doldur
         WebElement firstNameInput = driver.findElement(By.cssSelector("input#firstName"));
-        firstNameInput.sendKeys("Abdullah");
+        firstNameInput.sendKeys("John");
 
         WebElement lastNameInput = driver.findElement(By.cssSelector("input#lastName"));
-        lastNameInput.sendKeys("Şahin");
+        lastNameInput.sendKeys("Doe");
 
         WebElement emailInput = driver.findElement(By.cssSelector("input#userEmail"));
-        emailInput.sendKeys("asahin@example.com");
+        emailInput.sendKeys("johndoe@example.com");
 
         WebElement ageInput = driver.findElement(By.cssSelector("input#age"));
-        ageInput.sendKeys("36");
+        ageInput.sendKeys("30");
 
         WebElement salaryInput = driver.findElement(By.cssSelector("input#salary"));
-        salaryInput.sendKeys("500000");
+        salaryInput.sendKeys("50000");
 
         WebElement departmentInput = driver.findElement(By.cssSelector("input#department"));
-        departmentInput.sendKeys("TEST");
+        departmentInput.sendKeys("IT");
 
         // Kaydet düğmesine tıkla
         WebElement saveButton = driver.findElement(By.cssSelector("button#submit"));
@@ -50,12 +62,21 @@ public class WebTablesTest {
         // Kaydı güncelle
         WebElement updatedFirstNameInput = driver.findElement(By.cssSelector("input#firstName"));
         updatedFirstNameInput.clear();
-        updatedFirstNameInput.sendKeys("Alperen");
+        updatedFirstNameInput.sendKeys("Jane");
 
         WebElement updateButton = driver.findElement(By.cssSelector("button#submit"));
         updateButton.click();
 
-        driver.quit();
+        // Güncellenen kaydın kontrolünü yap
+        WebElement updatedRecord = driver.findElement(By.cssSelector("div.rt-tbody > div.rt-tr-group:last-child"));
+        WebElement updatedFirstName = updatedRecord.findElement(By.cssSelector("div.rt-td:nth-child(1)"));
+        assertEquals("Jane", updatedFirstName.getText());
+    }
+
+    @After
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
-
