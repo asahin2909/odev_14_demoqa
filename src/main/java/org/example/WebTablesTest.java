@@ -18,22 +18,22 @@ public class WebTablesTest {
         addButton.click();
 
         // Yeni kayıt formunu doldur
-        WebElement firstNameInput = driver.findElement(By.id("firstName"));
+        WebElement firstNameInput = driver.findElement(By.cssSelector("input#firstName"));
         firstNameInput.sendKeys("Abdullah");
 
-        WebElement lastNameInput = driver.findElement(By.id("lastName"));
+        WebElement lastNameInput = driver.findElement(By.cssSelector("input#lastName"));
         lastNameInput.sendKeys("Şahin");
 
-        WebElement emailInput = driver.findElement(By.id("userEmail"));
+        WebElement emailInput = driver.findElement(By.cssSelector("input#userEmail"));
         emailInput.sendKeys("asahin@example.com");
 
-        WebElement ageInput = driver.findElement(By.id("age"));
+        WebElement ageInput = driver.findElement(By.cssSelector("input#age"));
         ageInput.sendKeys("36");
 
-        WebElement salaryInput = driver.findElement(By.id("salary"));
+        WebElement salaryInput = driver.findElement(By.cssSelector("input#salary"));
         salaryInput.sendKeys("500000");
 
-        WebElement departmentInput = driver.findElement(By.id("department"));
+        WebElement departmentInput = driver.findElement(By.cssSelector("input#department"));
         departmentInput.sendKeys("TEST");
 
         // Kaydet düğmesine tıkla
@@ -48,7 +48,7 @@ public class WebTablesTest {
         editButton.click();
 
         // Kaydı güncelle
-        WebElement updatedFirstNameInput = driver.findElement(By.id("firstName"));
+        WebElement updatedFirstNameInput = driver.findElement(By.cssSelector("input#firstName"));
         updatedFirstNameInput.clear();
         updatedFirstNameInput.sendKeys("Alperen");
 
