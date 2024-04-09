@@ -10,26 +10,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DemoqaTest {
 
     public static void main(String[] args) {
-        // WebDriver'ı başlat
         WebDriver driver = new ChromeDriver();
-
-        // demoqa.com adresine git
         driver.get("https://demoqa.com/elements");
 
         // "Buttons" seçeneğine tıkla
-        WebElement buttonsOption = driver.findElement(By.xpath("//span[text()='Buttons']"));
+        WebElement buttonsOption = driver.findElement(By.cssSelector("span.menu-list:nth-child(3)"));
         buttonsOption.click();
 
         // "Click Me" düğmesine tıkla
         WebDriverWait wait = new WebDriverWait(driver, 10);
-        WebElement clickMeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Click Me']")));
+        WebElement clickMeButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button[id='doubleClickBtn']")));
         clickMeButton.click();
 
         // Görünen mesajı oku
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("dynamicClickMessage")));
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("doubleClickMessage")));
         System.out.println("Görünen mesaj: " + message.getText());
 
-        // WebDriver'ı kapat
         driver.quit();
     }
 }

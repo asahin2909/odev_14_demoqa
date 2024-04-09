@@ -10,14 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class WebTablesTest {
 
     public static void main(String[] args) {
-        // WebDriver'ı başlat
         WebDriver driver = new ChromeDriver();
-
-        // demoqa.com adresine git
         driver.get("https://demoqa.com/webtables");
 
         // "ADD" düğmesine tıkla
-        WebElement addButton = driver.findElement(By.id("addNewRecordButton"));
+        WebElement addButton = driver.findElement(By.cssSelector("button#addNewRecordButton"));
         addButton.click();
 
         // Yeni kayıt formunu doldur
@@ -40,14 +37,14 @@ public class WebTablesTest {
         departmentInput.sendKeys("TEST");
 
         // Kaydet düğmesine tıkla
-        WebElement saveButton = driver.findElement(By.id("submit"));
+        WebElement saveButton = driver.findElement(By.cssSelector("button#submit"));
         saveButton.click();
 
         // Eklenen kaydı bul
-        WebElement editedRecord = driver.findElement(By.xpath("//div[@role='row'][last()]"));
+        WebElement editedRecord = driver.findElement(By.cssSelector("div.rt-tbody > div.rt-tr-group:last-child"));
 
         // Kaydı düzenle
-        WebElement editButton = editedRecord.findElement(By.xpath(".//button[text()='Edit']"));
+        WebElement editButton = editedRecord.findElement(By.cssSelector("div > div > span:nth-child(1) > button"));
         editButton.click();
 
         // Kaydı güncelle
@@ -55,10 +52,10 @@ public class WebTablesTest {
         updatedFirstNameInput.clear();
         updatedFirstNameInput.sendKeys("Alperen");
 
-        WebElement updateButton = driver.findElement(By.id("submit"));
+        WebElement updateButton = driver.findElement(By.cssSelector("button#submit"));
         updateButton.click();
 
-        // WebDriver'ı kapat
         driver.quit();
     }
 }
+
